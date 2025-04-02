@@ -1,19 +1,20 @@
-// src/lib/dbConnect.js (or db.js)
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-    if (mongoose.connections[0].readyState) {
-        return; // Already connected
+    if (mongoose.connection.readyState >= 1) {
+        return;
     }
 
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        if (!process.env.MONGODB_URI) {
+            throw new Error("MONGODB_URI is missing in .env.local file");
+        }
+
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("✅ Connected to MongoDB");
     } catch (error) {
-        console.error("Error connecting to MongoDB:", error);
-        process.exit(1);
+        console.error("❌ Error connecting to MongoDB:", error.message);
+        process.exit(1); // Stop server if connection fails
     }
 };
 
