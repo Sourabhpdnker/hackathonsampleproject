@@ -1,3 +1,7 @@
+import React from "react";
+
+
+
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -12,21 +16,23 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Home Page</h1>
-        <p className="text-lg text-gray-600 mb-4">
-          Welcome, {session.user.name}!
-        </p>
-
-        {/* Logout Button */}
-        <button
-          onClick={() => signOut({ callbackUrl: "/login" })} // Redirects to login after logout
-          className="mt-4 px-6 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
-        >
-          Logout
-        </button>
+    <div style={{ fontFamily: "Arial, sans-serif", backgroundColor: "#f5f5f5" }}>
+      {/* <Navbar /> */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "50px" }}>
+        <div style={{ fontSize: "32px", fontWeight: "bold", maxWidth: "50%" }}>Platform for New Admission for Engineering</div>
+        <div>
+          <img src="/mnt/data/download.jpg" alt="Happy Students" style={{ width: "300px", borderRadius: "10px" }} />
+        </div>
       </div>
+      <button
+onClick={() => signOut({ callbackUrl: "/login" })} // Redirects to login after logout
+className="mt-4 px-6 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
+>
+Logout
+</button>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "20px", fontWeight: "bold" }}>😊 Happy Students</div>
     </div>
-  );
+ 
+  );
 }
+
