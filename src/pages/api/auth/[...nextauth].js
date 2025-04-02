@@ -21,12 +21,12 @@ export default NextAuth({
                 const user = await User.findOne({ email: credentials.email });
 
                 if (!user) {
-                    throw new Error("User not found");
+                    throw new Error("No user found with this email");
                 }
 
                 const isValid = await bcrypt.compare(credentials.password, user.password);
                 if (!isValid) {
-                    throw new Error("Invalid credentials");
+                    throw new Error("Invalid password");
                 }
 
                 return { id: user._id, name: user.name, email: user.email };
